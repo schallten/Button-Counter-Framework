@@ -38,7 +38,7 @@ renderRoot(App, document.getElementById("app"));`;
 
     const aiPrompt = `Use the Button Counter Framework - a tiny React-like library loaded via CDN.
 
-Import from: https://esm.sh/button-counter-framework
+Import from: https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts
 
 Available exports: h, useState, renderRoot
 
@@ -48,7 +48,7 @@ Usage:
 - renderRoot(Component, document.getElementById("app")) to mount
 
 Example:
-import { h, useState, renderRoot } from "https://esm.sh/button-counter-framework";
+import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -59,7 +59,7 @@ function App() {
 }
 renderRoot(App, document.getElementById("app"));`;
 
-    const boilerplateCodeContent = `import { h, useState, renderRoot } from "https://esm.sh/button-counter-framework";
+    const boilerplateCodeContent = `import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts";
 
 function App() {
     const [count, setCount] = useState(0);

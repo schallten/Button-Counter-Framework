@@ -32,14 +32,19 @@ export function createElement(vnode: VNodeChild): Node {
     // handle html elements
     // ts now knows vnode.type is string not function
     const el : HTMLElement = document.createElement(vnode.type);
+    console.log("Creating element:", vnode.type, "props:", vnode.props);
     // apply properties and event listeners
     for (let key in vnode.props){
+        console.log("  Setting prop:", key, "=", vnode.props[key]);
         // check if pprroperty is an event handler
         if (key.startsWith("on")){
-            // simplified event bindinlgin
-            // e.g.g "onClick" -> el.onclick = handler
-            (el as any)[key.toLowerCase()] = vnode.props[key];
-        }else{
+            const eventName = key.slice(2).toLowerCase();
+            console.log("  Attaching event:", eventName);
+            (el as any)["on" + eventName] = vnode.props[key];
+        } else if (key === "value" && (vnode.type === "input" || vnode.type === "textarea")) {
+            // set value directly for inputs (not as attribute)
+            (el as HTMLInputElement).value = vnode.props[key];
+        } else {
             //s tandard html attributes
             el.setAttribute(key,vnode.props[key]);
         }

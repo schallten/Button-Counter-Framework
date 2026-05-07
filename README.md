@@ -1,5 +1,7 @@
 # Button Counter Framework
 
+[![](https://data.jsdelivr.com/v1/package/gh/schallten/Button-Counter-Framework/badge)](https://www.jsdelivr.com/package/gh/schallten/Button-Counter-Framework)
+
 A minimal, document-driven React clone (hooks era) designed for deep understanding of the global render loop, VNodes, and state management.
 
 [View on GitHub](https://github.com/schallten/Button-Counter-Framework) | [Live Demo & Tutorial](https://schallten.github.io/Button-Counter-Framework/)
@@ -83,5 +85,5 @@ This framework is built on a "Nuclear Rerender" model: when state changes, the e
 You can use this framework directly in your browser without any build tools:
 
 ```javascript
-import { h, useState, renderRoot } from "https://cdn.jsdelivr.net/gh/schallten/Button-Counter-Framework@main/core/index.ts";
+import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts";
 ```
