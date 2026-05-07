@@ -1,0 +1,1 @@
+{"language": "javascript", "framework": null, "test_framework": "vitest", "linter": null, "typechecker": null, "build_command": "npm run build", "test_pattern": "*.test.ts", "src_pattern": "*.js", "package_manager": "npm"}
