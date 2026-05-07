@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "react-clone",
@@ -27,6 +28,7 @@
     "url": "https://github.com/schallten/Button-Counter-Framework.git"
   },
   "devDependencies": {
+    "typescript": "^6.0.3",
     "vite": "^5.0.0"
   }
 }
