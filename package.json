@@ -1,31 +1,24 @@
 {
   "name": "button-counter-framework",
   "version": "0.1.0",
-  "description": "A minimal, educational React-like framework with hooks and VNodes. Under 1KB, no build step required.",
+  "description": "A minimal, educational React-like framework with hooks and VNodes.",
   "type": "module",
-  "exports": {
-    ".": "./core/index.ts",
-    "./hooks": "./core/hooks.ts",
-    "./render": "./core/render.ts",
-    "./h": "./core/h.ts",
-    "./app": "./core/app.ts"
-  },
+  "main": "./core/index.js",
+  "module": "./core/index.js",
   "files": [
     "core"
   ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "preview": "vite preview"
   },
   "keywords": [
     "react-clone",
     "hooks",
     "vnode",
     "educational",
-    "minimal",
-    "framework"
+    "minimal"
   ],
   "author": "schallten",
   "license": "MIT",
@@ -34,7 +27,6 @@
     "url": "https://github.com/schallten/Button-Counter-Framework.git"
   },
   "devDependencies": {
-    "typescript": "^6.0.3",
     "vite": "^5.0.0"
   }
 }

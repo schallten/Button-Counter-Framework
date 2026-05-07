@@ -1,6 +1,6 @@
-import { h, useState, renderRoot } from "./core/index.ts";
+import { h, useState, renderRoot } from "./core/index.js";
 
-function Nav({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (tab: string) => void }) {
+function Nav({ activeTab, setActiveTab }) {
     return h("nav", { style: "display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;" },
         h("button", {
             onclick: () => setActiveTab("home"),
@@ -13,32 +13,18 @@ function Nav({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (ta
     );
 }
 
-function copyToClipboard(text: string) {
+function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
 }
 
 function Home() {
-    const [copiedBoilerplate, setCopiedBoilerplate] = useState(false);
-    const [copiedPrompt, setCopiedPrompt] = useState(false);
-
-    const boilerplateCode = `import { h, useState, renderRoot } from "./core/index.ts";
-
-function App() {
     const [count, setCount] = useState(0);
-
-    return h("div", {},
-        h("h1", {}, "My Counter: " + count),
-        h("button", {
-            onclick: () => setCount(count + 1)
-        }, "Increment")
-    );
-}
-
-renderRoot(App, document.getElementById("app"));`;
+    const [copiedPrompt, setCopiedPrompt] = useState(false);
+    const [copiedBoilerplate, setCopiedBoilerplate] = useState(false);
 
     const aiPrompt = `Use the Button Counter Framework - a tiny React-like library loaded via CDN.
 
-Import from: https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts
+Import from: https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.js
 
 Available exports: h, useState, renderRoot
 
@@ -48,7 +34,7 @@ Usage:
 - renderRoot(Component, document.getElementById("app")) to mount
 
 Example:
-import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts";
+import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.js";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -59,7 +45,7 @@ function App() {
 }
 renderRoot(App, document.getElementById("app"));`;
 
-    const boilerplateCodeContent = `import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.ts";
+    const boilerplateCode = `import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.js";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -75,39 +61,47 @@ function App() {
 renderRoot(App, document.getElementById("app"));`;
 
     return h("div", {},
-        h("section", { class: "demo" },
-            h("h2", { style: "text-align: center; margin-bottom: 2rem;" }, "Interactive Demo"),
-            h("div", { class: "card" },
-                h("span", { class: "count" }, "0"),
-                h("button", { onclick: () => {} }, "Increment Count")
+        h("section", { class: "demo", style: "text-align: center; padding: 2rem; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 2rem;" },
+            h("h2", { style: "margin-bottom: 1.5rem;" }, "Interactive Demo"),
+            h("div", { class: "card", style: "display: inline-block; padding: 1.5rem 3rem; border: 1px solid var(--border); border-radius: 8px;" },
+                h("span", { class: "count" }, count),
+                h("div", { style: "margin-top: 1rem;" },
+                    h("button", { onclick: () => setCount(count + 1), style: "margin-right: 0.5rem;" }, "+1")
+                )
             )
         ),
         h("section", { class: "docs" },
             h("h2", {}, "What is this?"),
             h("p", {}, "Button Counter Framework is a simplified version of React. It's built for those who want to understand how modern websites actually work under the hood without the confusion of complex tools.")
         ),
-        h("section", { class: "docs" },
+        h("section", { class: "docs", style: "margin-top: 2rem;" },
             h("h2", {}, "Tell Your AI Agent How to Use This"),
-            h("p", {}, "Want an AI to build something with this framework? Click copy to get a prompt that explains everything."),
-            h("button", {
-                class: "copy-btn",
-                onclick: () => {
-                    copyToClipboard(aiPrompt);
-                    setCopiedPrompt(true);
-                    setTimeout(() => setCopiedPrompt(false), 2000);
-                },
-                style: "background: var(--accent); color: var(--bg); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;"
-            }, copiedPrompt ? "Copied to Clipboard!" : "Copy AI Prompt")
-        ),
-        h("section", { class: "docs" },
-            h("h2", {}, "Quick Start (Copy & Paste)"),
-            h("p", {}, "Create a new .ts file and paste this code to get started instantly:"),
-            h("div", { class: "code-block-wrapper" },
-                h("pre", { class: "code-block" }, boilerplateCodeContent),
+            h("p", {}, "Want an AI to build something with this framework? Click copy to get a prompt that explains everything. "),
+            h("a", { href: "https://rta-three.vercel.app/", target: "_blank", style: "color: var(--accent); text-decoration: underline;" }, "Try this AI agent"),
+            h("div", { style: "margin-top: 1rem;" },
                 h("button", {
-                    class: "copy-btn",
                     onclick: () => {
-                        copyToClipboard(boilerplateCodeContent);
+                        copyToClipboard(aiPrompt);
+                        setCopiedPrompt(true);
+                    },
+                    style: "background: var(--accent); color: var(--bg); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;"
+                }, "Copy AI Prompt")
+            ),
+            copiedPrompt ? h("div", { class: "toast" },
+                h("span", {}, "Prompt copied! Paste it to "),
+                h("a", { href: "https://rta-three.vercel.app/", target: "_blank", style: "color: inherit; font-weight: 600;" }, "this AI"),
+                h("span", {}, " for best results."),
+                h("button", { onclick: () => setCopiedPrompt(false), style: "background: none; border: none; color: inherit; margin-left: 1rem; cursor: pointer; font-size: 1.2rem;" }, "x")
+            ) : null
+        ),
+        h("section", { class: "docs", style: "margin-top: 2rem;" },
+            h("h2", {}, "Quick Start (Copy & Paste)"),
+            h("p", {}, "Create a new .js file and paste this code:"),
+            h("div", { class: "code-block-wrapper", style: "position: relative;" },
+                h("pre", { class: "code-block" }, boilerplateCode),
+                h("button", {
+                    onclick: () => {
+                        copyToClipboard(boilerplateCode);
                         setCopiedBoilerplate(true);
                         setTimeout(() => setCopiedBoilerplate(false), 2000);
                     },
@@ -259,9 +253,9 @@ h(Greeting, { name: "Alex" })`),
 
         // CHALLENGES
         h("div", { class: "step" },
-            h("h2", {}, "Challenges"),
+            h("h2", {}, "Challenges 🚀"),
             h("ul", {},
-                h("li", {}, "Make a like button"),
+                h("li", {}, "Make a like button ❤️"),
                 h("li", {}, "Build a name input field"),
                 h("li", {}, "Create a todo list"),
                 h("li", {}, "Make a dark mode toggle")
@@ -270,7 +264,7 @@ h(Greeting, { name: "Alex" })`),
 
         // OUTRO
         h("footer", { style: "margin-top: 3rem; text-align: center;" },
-            h("h3", {}, "You now understand the core ideas"),
+            h("h3", {}, "You now understand the core ideas 🎉"),
             h("p", {}, "Next step: build something small and break it.")
         )
     );
@@ -294,12 +288,12 @@ function App() {
             h("button", {
                 onclick: () => setTheme(theme === "dark" ? "light" : "dark"),
                 style: "background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0.5rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;"
-            }, theme === "dark" ? "Light" : "Dark")
+            }, theme === "dark" ? "☀️" : "🌙")
         ),
 
         h(Nav, { activeTab, setActiveTab }),
 
-        activeTab === "home" ? h(Home, null) : h(Tutorial, null),
+        activeTab === "home" ? h(Home) : h(Tutorial),
 
         h("footer", { class: "main-footer" },
             h("p", {}, "Educational project | "),
@@ -308,7 +302,4 @@ function App() {
     );
 }
 
-const rootElement = document.getElementById("app");
-if (rootElement) {
-    renderRoot(App, rootElement);
-}
+renderRoot(App, document.getElementById("app"));

@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal React Clone</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Todo List - Button Counter Framework</title>
+    <link rel="stylesheet" href="../../index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .todo-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+        .todo-item.done span { text-decoration: line-through; opacity: 0.5; }
+        input[type="text"] { padding: 0.5rem; border-radius: 8px; border: 1px solid #ddd; width: 70%; margin-right: 0.5rem; }
+    </style>
 </head>
 <body>
     <div id="app"></div>
