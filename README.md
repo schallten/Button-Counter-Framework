@@ -1,4 +1,4 @@
-# Button Counter Framework (v0.1.0)
+# Button Counter Framework
 
 A minimal, document-driven React clone (hooks era) designed for deep understanding of the global render loop, VNodes, and state management.
 
@@ -42,25 +42,9 @@ Then open http://localhost:5173 in your browser.
 
 ---
 
-## Examples Included
+## Focus Preservation
 
-The project includes three example applications:
-
-- **Todo List**: Demonstrates focus preservation and list rendering
-- **Calculator**: State-heavy arithmetic application
-- **Timer**: Real-time interval updates
-
-To run an example, update `index.html` to point to the example's `main.js`:
-
-```html
-<script type="module" src="./examples/todo/main.js"></script>
-```
-
----
-
-## v0.1.0: Focus Preservation
-
-Unlike most "nuclear" rerender frameworks, Button Counter Framework v0.1.0 includes a **Focus & Selection Tracking System**. This allows you to build complex forms (like Todo lists) without losing input focus on every keystroke, while still keeping the framework's core under 1KB.
+Unlike most "nuclear" rerender frameworks, Button Counter Framework includes a **Focus & Selection Tracking System**. This allows you to build complex forms (like Todo lists) without losing input focus on every keystroke, while still keeping the framework's core under 1KB.
 
 ---
 
@@ -99,5 +83,5 @@ This framework is built on a "Nuclear Rerender" model: when state changes, the e
 You can use this framework directly in your browser without any build tools:
 
 ```javascript
-import { h, useState, renderRoot } from "https://cdn.jsdelivr.net/gh/schallten/Button-Counter-Framework@main/core/index.js";
+import { h, useState, renderRoot } from "https://cdn.jsdelivr.net/gh/schallten/Button-Counter-Framework@main/core/index.ts";
 ```

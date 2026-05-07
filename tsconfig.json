@@ -16,6 +16,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "h"
   },
-  "include": ["core/**/*", "examples/**/*"],
+  "include": ["core/**/*", "examples/**/*", "main.ts"],
   "exclude": ["node_modules"]
 }
