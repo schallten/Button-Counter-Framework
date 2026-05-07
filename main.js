@@ -1,4 +1,4 @@
-import { h, useState, renderRoot } from "./core/index.js";
+import { h, useState, renderRoot } from "https://esm.sh/gh/schallten/Button-Counter-Framework/core/index.js";
 
 function Nav({ activeTab, setActiveTab }) {
     return h("nav", { style: "display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;" },
@@ -77,21 +77,22 @@ renderRoot(App, document.getElementById("app"));`;
         h("section", { class: "docs", style: "margin-top: 2rem;" },
             h("h2", {}, "Tell Your AI Agent How to Use This"),
             h("p", {}, "Want an AI to build something with this framework? Click copy to get a prompt that explains everything. "),
-            h("a", { href: "https://rta-three.vercel.app/", target: "_blank", style: "color: var(--accent); text-decoration: underline;" }, "Try this AI agent"),
-            h("div", { style: "margin-top: 1rem;" },
+            h("a", { href: "https://rta-three.vercel.app/", target: "_blank" }, "Try this AI agent"),
+            h("div", { style: "margin-top: 1.5rem;" },
                 h("button", {
                     onclick: () => {
-                        copyToClipboard(aiPrompt);
                         setCopiedPrompt(true);
+                        copyToClipboard(aiPrompt);
+                        setTimeout(() => setCopiedPrompt(false), 3000);
                     },
-                    style: "background: var(--accent); color: var(--bg); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;"
+                    style: "padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.2s ease;"
                 }, "Copy AI Prompt")
             ),
             copiedPrompt ? h("div", { class: "toast" },
-                h("span", {}, "Prompt copied! Paste it to "),
-                h("a", { href: "https://rta-three.vercel.app/", target: "_blank", style: "color: inherit; font-weight: 600;" }, "this AI"),
+                h("span", {}, "✨ Prompt copied! Paste it to "),
+                h("a", { href: "https://rta-three.vercel.app/", target: "_blank" }, "this AI"),
                 h("span", {}, " for best results."),
-                h("button", { onclick: () => setCopiedPrompt(false), style: "background: none; border: none; color: inherit; margin-left: 1rem; cursor: pointer; font-size: 1.2rem;" }, "x")
+                h("button", { onclick: () => setCopiedPrompt(false), style: "background: none; border: none; color: inherit; margin-left: 0.5rem; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center;" }, "×")
             ) : null
         ),
         h("section", { class: "docs", style: "margin-top: 2rem;" },
@@ -107,6 +108,15 @@ renderRoot(App, document.getElementById("app"));`;
                     },
                     style: "position: absolute; top: 0.5rem; right: 0.5rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.75rem;"
                 }, copiedBoilerplate ? "Copied!" : "Copy")
+            )
+        ),
+        h("section", { class: "docs", style: "margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);" },
+            h("h2", {}, "Explore Examples"),
+            h("p", {}, "See what you can build with this framework:"),
+            h("div", { style: "display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem;" },
+                h("a", { href: "examples/calculator/index.html", class: "example-link" }, "🧮 Calculator"),
+                h("a", { href: "examples/timer/index.html", class: "example-link" }, "⏱️ Timer"),
+                h("a", { href: "examples/todo/index.html", class: "example-link" }, "📝 Todo App")
             )
         )
     );
